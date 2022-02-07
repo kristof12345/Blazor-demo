@@ -1,0 +1,39 @@
+﻿@page "/"
+
+@using System.ComponentModel.DataAnnotations;
+@using Syncfusion.Blazor.Inputs;
+@using Syncfusion.Blazor.Buttons;
+
+<PageTitle>Index</PageTitle>
+
+<EditForm Model=@Model OnValidSubmit=@ValidSubmit OnInvalidSubmit=@InvalidSubmit>
+    <DataAnnotationsValidator />
+    <SfTextBox Value=@Model.Value ValueChanged=@ValueChanged FloatLabelType=@FloatLabelType.Auto Placeholder="Label" CssClass="e-outline e-bigger" ValueExpression=@(() => Model.Value) />
+    <SfButton type="submit">Submit</SfButton>
+</EditForm>
+
+@code
+{
+    private DemoModel Model = new DemoModel();
+
+    private void ValueChanged(string v)
+    {
+        Model.Value = v;
+    }
+
+    private async Task ValidSubmit()
+    {
+        var a = Model;
+    }
+
+    private async Task InvalidSubmit()
+    {
+        var b = Model;
+    }
+
+    public class DemoModel
+    {
+        [Required]
+        public string Value { get; set; }
+    }
+}
